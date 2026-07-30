@@ -1,0 +1,42 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Configure CMake
+      run: cmake -B build
+
+    - name: Build
+      run: cmake --build build --config Release
+
+    - name: Prepare Release Artifacts
+      run: |
+        mkdir release_package
+        mkdir release_package\src
+        mkdir release_package\src\rom
+        copy build\gb_emulator.exe release_package\
+        echo. > release_package\settings.ini
+        echo. > release_package\src\rom\.gitkeep
+      shell: cmd
+
+    - name: Create Zip Archive
+      run: Compress-Archive -Path release_package\* -DestinationPath GameBoyEmulator.zip
+      shell: powershell
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: GameBoyEmulator.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
