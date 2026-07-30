@@ -28,16 +28,16 @@ Open your terminal (Command Prompt / PowerShell) and run the following commands:
 cmake -B build
 
 # 2. Compile the executable
-cmake --build build --config Release
+cmake --build build
 ```
-The compiled executable will be located at `build/Release/gb_emulator.exe`.
+*(Note: By default on Visual Studio/MSVC, the executable will be located at `build\Debug\gb_emulator.exe`. If you want an optimized version, run `cmake --build build --config Release` and find it in `build\Release\gb_emulator.exe`.)*
 
 ### Running the Emulator
 You can launch the emulator in two ways:
 1. **Direct Launch**: Simply double-click `gb_emulator.exe`. Once the window opens, you can drag and drop any `.gb` ROM file into the emulator window to start playing.
 2. **Command Line**: Run the executable and pass the ROM file path as an argument.
    ```bat
-   gb_emulator.exe "path/to/your/game.gb"
+   .\build\Debug\gb_emulator.exe "path/to/your/game.gb"
    ```
 
 ## ROMs
