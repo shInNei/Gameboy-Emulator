@@ -1,6 +1,7 @@
 # GameBoy Emulator
 
 A complete GameBoy emulator written in C++ with SDL2, OpenGL, and ImGui.
+*(Note: This emulator is specifically designed and built for Windows)*
 
 ## Features
 - Full CPU instruction set emulation
