@@ -1,7 +1,6 @@
 # GameBoy Emulator
 
 A complete GameBoy emulator written in C++ with SDL2, OpenGL, and ImGui.
-*(Note: This emulator is specifically designed and built for Windows)*
 
 ## Features
 - Full CPU instruction set emulation
@@ -14,7 +13,6 @@ A complete GameBoy emulator written in C++ with SDL2, OpenGL, and ImGui.
 - Slow-motion support
 
 ## Build & Run Instructions
-This emulator is built specifically for **Windows 11**.
 
 ### Requirements
 - **OS**: Windows 11
@@ -43,7 +41,7 @@ You can launch the emulator in two ways:
 ## ROMs
 You can download test ROMs and game ROMs to play from the links below:
 - **Test ROMs:** [c-sp/game-boy-test-roms](https://github.com/c-sp/game-boy-test-roms)
-- **Game ROMs:** [Google Drive Collection](https://drive.google.com/drive/folders/1JgnLjNZpI0l10GN4OGHr47ceT9yhh4UT) *(Note: This collection is provided and hosted by **theretrogamesite**, not by me. Please adhere to their terms and conditions.)*
+- **Game ROMs:** [Google Drive Collection](https://drive.google.com/drive/folders/1JgnLjNZpI0l10GN4OGHr47ceT9yhh4UT) *(Note: This collection is provided and hosted by **theretrogamesite**)*
 
 ## Tech Stack
 - **C++20**
