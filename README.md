@@ -19,7 +19,7 @@ This emulator is built specifically for **Windows 11**.
 ### Requirements
 - **OS**: Windows 11
 - **CMake**: Version 3.20 or higher
-- **Compiler**: MSVC (Visual Studio 2019/2022) or any compatible C++20 compiler on Windows.
+- **Compiler**: MinGW (GCC) or any compatible C++20 compiler on Windows.
 
 ### Build from source
 Open your terminal (Command Prompt / PowerShell) and run the following commands:
@@ -30,14 +30,14 @@ cmake -B build
 # 2. Compile the executable
 cmake --build build
 ```
-*(Note: By default on Visual Studio/MSVC, the executable will be located at `build\Debug\gb_emulator.exe`. If you want an optimized version, run `cmake --build build --config Release` and find it in `build\Release\gb_emulator.exe`.)*
+*(Note: Using MinGW, the compiled executable will be located directly at `build\gb_emulator.exe`. If you are using MSVC on Windows, it may be placed in a subdirectory like `build\Debug\gb_emulator.exe` or `build\Release\gb_emulator.exe` depending on your config.)*
 
 ### Running the Emulator
 You can launch the emulator in two ways:
 1. **Direct Launch**: Simply double-click `gb_emulator.exe`. Once the window opens, you can drag and drop any `.gb` ROM file into the emulator window to start playing.
 2. **Command Line**: Run the executable and pass the ROM file path as an argument.
    ```bat
-   .\build\Debug\gb_emulator.exe "path/to/your/game.gb"
+   .\build\gb_emulator.exe "path/to/your/game.gb"
    ```
 
 ## ROMs
