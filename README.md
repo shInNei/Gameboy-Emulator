@@ -2,6 +2,8 @@
 
 A complete GameBoy emulator written in C++ with SDL2, OpenGL, and ImGui.
 
+📥 **[Download Latest Release](https://github.com/shInNei/Gameboy-Emulator/releases/latest)**
+
 ## Features
 - Full CPU instruction set emulation
 - PPU (Graphics) with flexible screen scaling and optional palette forcing
