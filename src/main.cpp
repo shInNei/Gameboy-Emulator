@@ -508,7 +508,11 @@ int main(int argc, char* argv[]) {
                 return sys ? sys->get_mmu().read(static_cast<gb::u16>(off)) : 0;
             };
             mem_edit.UserData = &system;
-            mem_edit.DrawWindow("Memory Editor (MMU)", &show_memory_editor, 0x10000);
+            ImGui::SetNextWindowSize(ImVec2(500, 400), ImGuiCond_FirstUseEver);
+            if (ImGui::Begin("Memory Editor (MMU)", &show_memory_editor, ImGuiWindowFlags_NoScrollbar)) {
+                mem_edit.DrawContents(nullptr, 0x10000);
+            }
+            ImGui::End();
         }
 
         // Rendering
