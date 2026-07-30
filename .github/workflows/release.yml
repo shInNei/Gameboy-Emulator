@@ -25,7 +25,7 @@ jobs:
         mkdir release_package
         mkdir release_package\src
         mkdir release_package\src\rom
-        copy build\gb_emulator.exe release_package\
+        copy build\Release\gb_emulator.exe release_package\
         echo. > release_package\settings.ini
         echo. > release_package\src\rom\.gitkeep
       shell: cmd
