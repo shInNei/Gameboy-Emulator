@@ -51,16 +51,6 @@ include_directories(
 # Core Library
 add_library(gb_core STATIC ${CORE_SOURCES})
 
-# Headless Test Runner Executable
-add_executable(gb_test_runner src/test_runner.cpp)
-target_link_libraries(gb_test_runner PRIVATE gb_core)
-
-add_executable(test_quiz_key src/test_quiz_key.cpp)
-target_link_libraries(test_quiz_key PRIVATE gb_core)
-
-add_executable(test_doraemon src/test_doraemon.cpp)
-target_link_libraries(test_doraemon PRIVATE gb_core)
-
 # Main GUI Application Executable
 add_executable(gb_emulator
     src/main.cpp

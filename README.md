@@ -2,20 +2,20 @@
 
 A complete GameBoy emulator written in C++ with SDL2, OpenGL, and ImGui.
 
-## Các chức năng
-- Full CPU instruction set emulation (Mô phỏng đầy đủ tập lệnh CPU)
-- PPU (Graphics) hỗ trợ scale màn hình linh hoạt và palette màu tùy chọn
-- APU (Audio) có đồng bộ hóa âm thanh và tùy chỉnh âm lượng
-- Hỗ trợ các thẻ băng MBC1, MBC2, MBC3, MBC5
-- Chế độ Debugger mạnh mẽ với Memory Editor (MMU) và theo dõi trạng thái CPU Registers
-- Hỗ trợ Save state / Battery save
-- Giao diện người dùng ImGui, cho phép kéo thả trực tiếp file ROM vào cửa sổ để chơi ngay
-- Hỗ trợ chế độ chạy chậm (Slow-motion)
+## Features
+- Full CPU instruction set emulation
+- PPU (Graphics) with flexible screen scaling and optional palette forcing
+- APU (Audio) with audio synchronization and volume control
+- Memory Bank Controller support (MBC1, MBC2, MBC3, MBC5)
+- Powerful Debugger mode with Memory Editor (MMU) and CPU Registers tracking
+- Save state / Battery save support
+- ImGui user interface, allowing drag-and-drop of ROM files directly into the window to play immediately
+- Slow-motion support
 
-## Link tải file test (Github test)
-Nếu bạn muốn tìm các file ROM test để kiểm tra độ chính xác của emulator, bạn có thể tải tại đây:
-- [Blargg's GameBoy Hardware Tests](https://github.com/retrio/gb-test-roms)
-- [Mooneye GB Test Suite](https://github.com/Gekkio/mooneye-test-suite)
+## ROMs
+You can download test ROMs and game ROMs to play from the links below:
+- **Test ROMs:** [c-sp/game-boy-test-roms](https://github.com/c-sp/game-boy-test-roms)
+- **Game ROMs:** [Google Drive Collection](https://drive.google.com/drive/folders/1JgnLjNZpI0l10GN4OGHr47ceT9yhh4UT)
 
 ## Tech Stack
 - **C++20**

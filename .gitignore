@@ -8,6 +8,12 @@ trace.log
 imgui.ini
 settings.ini
 
+# Ignore test source files
+src/test_runner.cpp
+src/test_quiz_key.cpp
+src/test_doraemon.cpp
+src/dump_hram.cpp
+
 # Ignore ROM files but keep the directory structure
 src/rom/*
 !src/rom/.gitkeep
