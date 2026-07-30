@@ -300,6 +300,8 @@ int main(int argc, char* argv[]) {
         }
 
         // 2. ROM Browser Window
+        ImGui::SetNextWindowPos(ImVec2(10, 30), ImGuiCond_FirstUseEver);
+        ImGui::SetNextWindowSize(ImVec2(320, 400), ImGuiCond_FirstUseEver);
         ImGui::Begin("ROM Browser", nullptr, ImGuiWindowFlags_MenuBar);
         {
             ImGui::Text("Current Directory:");
@@ -351,6 +353,8 @@ int main(int argc, char* argv[]) {
         ImGui::End();
 
         // 3. GameBoy Display Window
+        ImGui::SetNextWindowPos(ImVec2(340, 30), ImGuiCond_FirstUseEver);
+        ImGui::SetNextWindowSize(ImVec2(600, 550), ImGuiCond_FirstUseEver);
         ImGui::Begin("Display", nullptr, ImGuiWindowFlags_NoScrollbar);
         {
             ImGui::Text("Loaded: %s", selected_rom_info.c_str());
@@ -387,6 +391,8 @@ int main(int argc, char* argv[]) {
         ImGui::End();
 
         // 4. Settings Panel (Audio & Controller & Hardware Quirks)
+        ImGui::SetNextWindowPos(ImVec2(950, 30), ImGuiCond_FirstUseEver);
+        ImGui::SetNextWindowSize(ImVec2(320, 750), ImGuiCond_FirstUseEver);
         ImGui::Begin("Settings & Controls");
         {
             if (ImGui::CollapsingHeader("Emulation Controls", ImGuiTreeNodeFlags_DefaultOpen)) {
@@ -453,6 +459,8 @@ int main(int argc, char* argv[]) {
 
         // 5. Serial Log / Test Console
         if (debug_mode) {
+            ImGui::SetNextWindowPos(ImVec2(340, 590), ImGuiCond_FirstUseEver);
+            ImGui::SetNextWindowSize(ImVec2(600, 190), ImGuiCond_FirstUseEver);
             ImGui::Begin("Serial Output Console");
             {
                 if (ImGui::Button("Clear Log")) serial_log_buffer.clear();
@@ -472,6 +480,8 @@ int main(int argc, char* argv[]) {
 
         // 6. CPU Debugger Panel
         if (debug_mode) {
+            ImGui::SetNextWindowPos(ImVec2(10, 440), ImGuiCond_FirstUseEver);
+            ImGui::SetNextWindowSize(ImVec2(320, 340), ImGuiCond_FirstUseEver);
             ImGui::Begin("CPU Registers & Flags");
             {
                 const auto& r = system.get_cpu().get_registers();

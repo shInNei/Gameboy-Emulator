@@ -43,7 +43,7 @@ You can launch the emulator in two ways:
 ## ROMs
 You can download test ROMs and game ROMs to play from the links below:
 - **Test ROMs:** [c-sp/game-boy-test-roms](https://github.com/c-sp/game-boy-test-roms)
-- **Game ROMs:** [Google Drive Collection](https://drive.google.com/drive/folders/1JgnLjNZpI0l10GN4OGHr47ceT9yhh4UT)
+- **Game ROMs:** [Google Drive Collection](https://drive.google.com/drive/folders/1JgnLjNZpI0l10GN4OGHr47ceT9yhh4UT) *(Note: This collection is provided and hosted by **theretrogamesite**, not by me. Please adhere to their terms and conditions.)*
 
 ## Tech Stack
 - **C++20**
