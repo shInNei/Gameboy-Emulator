@@ -19,6 +19,14 @@
 
 namespace fs = std::filesystem;
 
+inline fs::path utf8_to_path(const std::string& s) {
+    return fs::path(reinterpret_cast<const char8_t*>(s.c_str()));
+}
+inline std::string path_to_utf8(const fs::path& p) {
+    auto u8 = p.u8string();
+    return std::string(reinterpret_cast<const char*>(u8.c_str()), u8.size());
+}
+
 // Default Key Mapping
 struct KeyConfig {
     SDL_Keycode up{SDLK_UP};
@@ -116,7 +124,7 @@ int main(int argc, char* argv[]) {
     SDL_Window* window = SDL_CreateWindow(
         "GameBoy Emulator - created by shinnei1509",
         SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-        1280, 800,
+        1420, 800,
         SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI
     );
 
@@ -166,10 +174,10 @@ int main(int argc, char* argv[]) {
 
     // ROM Browser State - Default to src/rom folder
     std::string current_rom_dir = "src/rom";
-    if (!fs::exists(current_rom_dir)) {
+    if (!fs::exists(utf8_to_path(current_rom_dir))) {
         current_rom_dir = ".";
     }
-    current_rom_dir = fs::absolute(current_rom_dir).string();
+    current_rom_dir = path_to_utf8(fs::absolute(utf8_to_path(current_rom_dir)));
     std::string selected_rom_info = "No ROM Loaded";
 
     // Debugger & Memory Editor
@@ -215,13 +223,13 @@ int main(int argc, char* argv[]) {
             if (event.type == SDL_DROPFILE) {
                 std::string dropped_file = event.drop.file;
                 try {
-                    fs::path src(dropped_file);
-                    fs::path dest = fs::path(current_rom_dir) / src.filename();
+                    fs::path src = utf8_to_path(dropped_file);
+                    fs::path dest = utf8_to_path(current_rom_dir) / src.filename();
                     if (src != dest) {
                         fs::copy_file(src, dest, fs::copy_options::overwrite_existing);
                     }
-                    if (system.load_rom(dest.string())) {
-                        selected_rom_info = dest.filename().string();
+                    if (system.load_rom(path_to_utf8(dest))) {
+                        selected_rom_info = path_to_utf8(dest.filename());
                         serial_log_buffer.clear();
                     }
                 } catch(const std::exception& e) {
@@ -307,9 +315,9 @@ int main(int argc, char* argv[]) {
             ImGui::Text("Current Directory:");
             ImGui::SameLine();
             if (ImGui::SmallButton("Up (..)")) {
-                fs::path p(current_rom_dir);
+                fs::path p = utf8_to_path(current_rom_dir);
                 if (p.has_parent_path()) {
-                    current_rom_dir = p.parent_path().string();
+                    current_rom_dir = path_to_utf8(p.parent_path());
                 }
             }
             ImGui::TextWrapped("%s", current_rom_dir.c_str());
@@ -317,18 +325,19 @@ int main(int argc, char* argv[]) {
 
             ImGui::BeginChild("ROMList", ImVec2(0, -55.0f), true);
             try {
-                if (fs::exists(current_rom_dir) && fs::is_directory(current_rom_dir)) {
-                    for (const auto& entry : fs::directory_iterator(current_rom_dir)) {
-                        std::string filename = entry.path().filename().string();
+                fs::path current_p = utf8_to_path(current_rom_dir);
+                if (fs::exists(current_p) && fs::is_directory(current_p)) {
+                    for (const auto& entry : fs::directory_iterator(current_p)) {
+                        std::string filename = path_to_utf8(entry.path().filename());
                         if (entry.is_directory()) {
                             std::string label = "[DIR] " + filename;
                             if (ImGui::Selectable(label.c_str())) {
-                                current_rom_dir = entry.path().string();
+                                current_rom_dir = path_to_utf8(entry.path());
                             }
-                        } else if (filename.ends_with(".gb") || filename.ends_with(".gbc")) {
+                        } else if (filename.ends_with(".gb")) {
                             std::string label = "[ROM] " + filename;
                             if (ImGui::Selectable(label.c_str())) {
-                                std::string full_path = entry.path().string();
+                                std::string full_path = path_to_utf8(entry.path());
                                 if (system.load_rom(full_path)) {
                                     selected_rom_info = filename;
                                     serial_log_buffer.clear();
@@ -348,7 +357,7 @@ int main(int argc, char* argv[]) {
             ImGui::EndChild();
 
             ImGui::Separator();
-            ImGui::TextWrapped("Tip: You can drag and drop a .gb/.gbc file directly into the emulator to copy and load it instantly.");
+            ImGui::TextWrapped("Tip: You can drag and drop a .gb file directly into the emulator to copy and load it instantly.");
         }
         ImGui::End();
 
@@ -392,7 +401,7 @@ int main(int argc, char* argv[]) {
 
         // 4. Settings Panel (Audio & Controller & Hardware Quirks)
         ImGui::SetNextWindowPos(ImVec2(950, 30), ImGuiCond_FirstUseEver);
-        ImGui::SetNextWindowSize(ImVec2(320, 750), ImGuiCond_FirstUseEver);
+        ImGui::SetNextWindowSize(ImVec2(450, 750), ImGuiCond_FirstUseEver);
         ImGui::Begin("Settings & Controls");
         {
             if (ImGui::CollapsingHeader("Emulation Controls", ImGuiTreeNodeFlags_DefaultOpen)) {
